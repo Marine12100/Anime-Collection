@@ -1,23 +1,39 @@
 <?php
-    $url = "http://localhost:8080/AnimeAPI/animes";
+//RECUPERATION DU TOKEN D'API
+  $filename = "secrets";
 
-    $ch = curl_init();
-      
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array("api-key: ValidApiKey"));
+  if (@file_exists($filename)) {
+      $fichier = @fopen($filename, "r");
 
-    $response = curl_exec($ch);
-    $err = curl_error($ch);
+      if($fichier != FALSE) {
+          $apiKey = fread($fichier, 50);
+          fclose($fichier);
+      }
+      else die("Erreur : ouverture impossible du fichier $filename !<br />");
+  }
+  else die("Erreur : le fichier $filename n’existe pas !<br />");
+
+//LISTE ANIMES
+
+  $url = "http://localhost:8080/AnimeAPI/animes";
+
+  $ch = curl_init();
     
-    if ($err) {
-      echo "cURL Error #:" . $err;
-    } else {
-      $result = json_decode($response, true);
-    }
+  curl_setopt($ch, CURLOPT_URL, $url);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array("api-key: ". $apiKey));
 
-    curl_close($ch);
+  $response = curl_exec($ch);
+  $err = curl_error($ch);
+  
+  if ($err) {
+    echo "cURL Error #:" . $err;
+  } else {
+    $result = json_decode($response, true);
+  }
+
+  curl_close($ch);
 ?>
 
 <!DOCTYPE html>
