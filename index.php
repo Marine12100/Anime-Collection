@@ -8,10 +8,12 @@
       if($fichier != FALSE) {
           $apiKey = fread($fichier, 50);
           fclose($fichier);
+      } else {
+        die("Erreur : ouverture impossible du fichier $filename !<br />");
       }
-      else die("Erreur : ouverture impossible du fichier $filename !<br />");
+  } else {
+    die("Erreur : le fichier $filename n’existe pas !<br />");
   }
-  else die("Erreur : le fichier $filename n’existe pas !<br />");
 
 //LISTE ANIMES
 
@@ -63,7 +65,8 @@
       <nav class="navbar bg-body-tertiary" style="background-color: #2F6288;">
           <div class="container-fluid">
             <a class="navbar-brand text-white" href="#">
-              <img src="files/Anime Collection EXTENDED.png" alt="Logo" width="200" height="30" class="d-inline-block align-text-center">
+              <img src="files/Anime Collection EXTENDED.png"
+              alt="Logo" width="200" height="30" class="d-inline-block align-text-center">
             </a>
           </div>
         </nav>
@@ -89,13 +92,13 @@
           <div class="row">
 
           <?php
-          foreach($result as $id){
+          foreach ($result as $id){
             ?>
             <!--Carte-->
             <div class="col mb-5">
                 <a href="description.php?id=<?php echo $id["id"];?>" style="text-decoration: none;">
                     <div class="card">
-                        <img class="card-img-top" src="<?php echo $id["lien_image"];?>"/>
+                        <img class="card-img-top" src="<?php echo $id["lien_image"];?>" alt="aperçu de l'animé"/>
                         <h3 class="fw-bolder"><?php echo $id["titre"];?></h3>
                         <div class="card-body p-4 focus-content">
                             <p><?php echo $id["studio_animation"];?><br/>
@@ -122,11 +125,29 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./Album example for Bootstrap_files/jquery-3.2.1.slim.min.js.téléchargement" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="./Album example for Bootstrap_files/jquery-3.2.1.slim.min.js.téléchargement"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+    <script>
+      window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+    </script>
     <script src="./Album example for Bootstrap_files/popper.min.js.téléchargement"></script>
     <script src="./Album example for Bootstrap_files/bootstrap.min.js.téléchargement"></script>
     <script src="./Album example for Bootstrap_files/holder.min.js.téléchargement"></script>
   
 
-<svg xmlns="http://www.w3.org/2000/svg" width="348" height="225" viewBox="0 0 348 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="17" style="font-weight:bold;font-size:17pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg></body></html>
+    <svg xmlns="http://www.w3.org/2000/svg"
+          width="348"
+          height="225"
+          viewBox="0 0 348 225"
+          preserveAspectRatio="none"
+          style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;">
+      <defs>
+        <style type="text/css"></style>
+      </defs>
+      <text x="0" y="17" style="font-weight:bold;font-size:17pt;font-family:Arial, Helvetica, Open Sans, sans-serif">
+        Thumbnail
+      </text>
+    </svg>
+  </body>
+</html>

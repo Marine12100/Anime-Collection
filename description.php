@@ -5,13 +5,15 @@
     if (@file_exists($filename)) {
         $fichier = @fopen($filename, "r");
         
-        if($fichier != FALSE) {
+        if ($fichier != 0) {
             $apiKey = fread($fichier, 50);
             fclose($fichier);
+        } else {
+            die("Erreur : ouverture impossible du fichier $filename !<br />");
         }
-        else die("Erreur : ouverture impossible du fichier $filename !<br />");
+    } else {
+        die("Erreur : le fichier $filename n’existe pas !<br />");
     }
-    else die("Erreur : le fichier $filename n’existe pas !<br />");
 
 //DESCRIPTION
 
@@ -84,7 +86,11 @@
             <nav class="navbar bg-body-tertiary" style="background-color: #2F6288;">
                 <div class="container-fluid">
                   <a class="navbar-brand text-white" href="index.php">
-                    <img src="files/Anime Collection EXTENDED.png" alt="Logo" width="200" height="30" class="d-inline-block align-text-center">
+                    <img src="files/Anime Collection EXTENDED.png"
+                            alt="Logo"
+                            width="200"
+                            height="30"
+                            class="d-inline-block align-text-center">
                   </a>
                 </div>
               </nav>
@@ -95,7 +101,10 @@
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6">
-                        <video class="card-img-top mb-5 mb-md-0" src="<?php echo $resultDescription["lien_video"];?>" controls poster="<?php echo $resultDescription["lien_image"];?>"></video>
+                        <video class="card-img-top mb-5 mb-md-0"
+                            src="<?php echo $resultDescription["lien_video"];?>"
+                            controls poster="<?php echo $resultDescription["lien_image"];?>">
+                        </video>
                     </div>
                     <div class="col-md-6">
                         <h1 class="display-5 fw-bolder"><?php echo $resultDescription["titre"];?></h1>
@@ -116,17 +125,22 @@
                 <h2 class="fw-bolder mb-4">Animés du même genre</h2>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <?php
-                        foreach($resultGenre as $result){
+                        foreach ($resultGenre as $result){
                             ?>
                                 <!--Carte-->
                                 <div class="col mb-5">
-                                    <a href="description.php?id=<?php echo $result["id"];?>" style="text-decoration: none;">
+                                    <a href="description.php?id=<?php echo $result["id"];?>"
+                                        style="text-decoration: none;">
                                         <div class="card">
-                                            <img class="card-img-top" src="<?php echo $result["lien_image"];?>"/>
+                                            <img class="card-img-top"
+                                                    src="<?php echo $result["lien_image"];?>"
+                                                    alt="aperçu de l'animé"/>
                                             <h3 class="fw-bolder"><?php echo $result["titre"];?></h3>
                                             <div class="card-body p-4 focus-content">
                                                 <p><?php echo $result["studio_animation"];?><br/>
-                                                    <small class="text-muted"><?php echo $result["date_sortie"];?></small>
+                                                    <small class="text-muted">
+                                                        <?php echo $result["date_sortie"];?>
+                                                    </small>
                                                 </p>
                                             </div>
                                         </div>
