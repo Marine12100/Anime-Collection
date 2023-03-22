@@ -125,7 +125,7 @@
                 <h2 class="fw-bolder mb-4">Animés du même genre</h2>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <?php
-                        foreach ($resultGenre as $result){
+                        foreach ($resultGenre as $result) {
                             ?>
                                 <!--Carte-->
                                 <div class="col mb-5">
